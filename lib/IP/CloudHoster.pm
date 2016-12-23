@@ -18,7 +18,7 @@ has plugins => (
 
 sub identify {
     my( $self, $ip, %options ) = @_;
-    
+
     # we'll return the first future that responds favourably
     my $f = Future->needs_any(
         map {

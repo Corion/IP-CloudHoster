@@ -7,20 +7,34 @@ use vars qw(@EXPORT_OK);
 
 =head1 SYNOPSIS
 
-    # Thundering herd, we can have multiple futures request the same data:
-    my $req = ua->request('https://ip-ranges.amazonaws.com/ip-ranges.json')
-    ->then(sub {
-    });
-
-
-    # No thundering herd, all requests to the URL will go through one Future
     my $url = 'https://ip-ranges.amazonaws.com/ip-ranges.json';
     my $res = shared_resource( \$requests{ $url } )->fetch( sub {
         ua->request($url)
     })->then( sub {
         ...
-    })
+    });
 
+=head1 THUNDERING HERD
+
+The following code demonstrates the Thundering Herd effect, we can have multiple
+futures request the same data even if the data is cached after the first
+response:
+
+    my $req = ua->request('https://ip-ranges.amazonaws.com/ip-ranges.json')
+    ->then(sub {
+        ....
+    });
+
+The solution to prevent the Thundering Herd is to accumulate all requests to the
+URL so that they will go through one Future:
+
+    my $url = 'https://ip-ranges.amazonaws.com/ip-ranges.json';
+    my $res = shared_resource( \$requests{ $url } )->fetch( sub {
+        ua->request($url)
+    })->then( sub {
+        ...
+    });
+    
 =head1 EXPORTED FUNCTIONS
 
 =head2 C<< shared_resource >>
@@ -38,6 +52,14 @@ request for the first resource completes.
 
 This prevents making multiple requests for the same cached resource just
 after the resource cache time has expired ("Thundering Herd").
+
+The subroutine passed to the C<< ->fetch >> method must return a future.
+
+The reference passed to the function is used by C<< shared_resource >>
+to recognize requests for a common resource. For example for HTTP requests,
+you could have a hash C<< %requested >> to indicate the requests in flight.
+
+The values of the reference are private to C<< shared_resource >>.
 
 =cut
 

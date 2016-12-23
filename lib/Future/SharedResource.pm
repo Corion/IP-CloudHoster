@@ -60,6 +60,11 @@ to recognize requests for a common resource. For example for HTTP requests,
 you could have a hash C<< %requested >> to indicate the requests in flight.
 
 The values of the reference are private to C<< shared_resource >>.
+The module guarantees that after all requests launching for the same resource
+have finished, the value of the reference will be set to undef.
+
+This allows keeping track of the number of requests in flight by counting
+the references that point to defined values.
 
 =cut
 

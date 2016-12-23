@@ -1,6 +1,6 @@
 #!perl -w
 use strict;
-use Test::More tests => 6;
+use Test::More tests => 7;
 
 use Future::SharedResource 'shared_resource';
 use AnyEvent::Future;
@@ -10,7 +10,7 @@ my $fetched_times;
 sub fetch_info {
     my( $result ) = @_;
     $fetched_times++;
-    
+
     my $f = AnyEvent::Future->new_delay( after => 5 )
     ->then( sub {
         Future->done( $result )
@@ -35,6 +35,8 @@ cmp_ok $taken, '<', 10, "The requests all completed in under 10 seconds";
 
 is_deeply \@data, [('the data') x 10], "All futures received the data"
     or diag Dumper \@data;
+
+is $url, undef, "After all requests have finished, the reference is set to undef";
 
 # Now also check that a new request is issued after all requests have finished:
 $started = time;

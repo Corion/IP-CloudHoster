@@ -25,8 +25,9 @@ has 'ua' => (
 );
 
 # This is to prevent a thundering herd when multiple requests are made
-has '_inflight_request' => (
-    is => 'rw',
+has 'inflight_requests' => (
+    is => 'ro',
+    default => sub { {} },
 );
 
 has '_aws_ip_ranges' => (
@@ -36,13 +37,12 @@ has '_aws_ip_ranges' => (
 # Also, can we turn the UA into a queueing resource with a similar
 # approach?
 
-my %requests;
 sub retrieve_aws_ips {
     my( $self, $address, $ua ) = @_;
     
     # Only request the resource once, even if there are multiple calls
     # while the request is still outstanding
-    shared_resource(\$requests{ $address })
+    shared_resource(\($self->inflight_requests->{ $address }))
     ->fetch( sub { $ua->http_get( $address ) })
 }
 

@@ -50,6 +50,7 @@ You should likely rate-limit access to the C<< get_range >> function.
 =cut
 
 sub get_range($class, %options) {
+warn "Fetching range for $options{asn}";
     croak "Need an ASN to query"
         unless $options{ asn };
     $options{ hostname } ||= 'whois.radb.net';
@@ -69,7 +70,5 @@ L<http://www.team-cymru.org/IP-ASN-mapping.html> - this would be a lookup using 
 L<Net::IRR>
 
 =cut
-
-package CloudHoster::ASN;
 
 1;

@@ -117,7 +117,7 @@ sub identify( $self, $ip, %options ) {
             };
         };
 
-        return Future->done()
+        return Future->fail()
     });
 }
 

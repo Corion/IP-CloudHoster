@@ -42,7 +42,7 @@ sub identify {
     # we'll return the first future that responds favourably
     my $f = Future->needs_any(
         map {
-            $_->identify( $ip, %options );
+            $_->identify( $ip, %options )
         } @{ $self->plugins }
     );
     return $f

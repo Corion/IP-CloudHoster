@@ -4,6 +4,8 @@ lib/Future/SharedResource.pm
 lib/IP/ASN.pm
 lib/IP/CloudHoster.pm
 lib/IP/CloudHoster/AWS.pm
+lib/IP/CloudHoster/HostEurope.pm
+lib/IP/CloudHoster/Role/ASN.pm
 Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP
@@ -13,6 +15,7 @@ README
 README.mkdn
 t/01-thundering-herd-multi.t
 t/01-thundering-herd.t
+t/50-ip-cloudhost-hosteurope.t
 t/50-ip-cloudhost-netflix.t
 t/70-ip-asn.t
 xt/99-changes.t

@@ -5,11 +5,15 @@ use Exporter 'import';
 use vars qw(@EXPORT_OK);
 @EXPORT_OK = qw(&shared_resource &make_shared_resource);
 
+=head1 NAME
+
+Future::SharedResource - satisfy multiple requests for a resource as one
+
 =head1 SYNOPSIS
 
     my $url = 'https://ip-ranges.amazonaws.com/ip-ranges.json';
     my $res = shared_resource( \$requests{ $url } )->fetch( sub {
-        ua->request($url)
+        $ua->request($url)
     })->then( sub {
         ...
     });
@@ -18,9 +22,9 @@ use vars qw(@EXPORT_OK);
 
 The following code demonstrates the Thundering Herd effect, we can have multiple
 futures request the same data even if the data is cached after the first
-response:
+successful response:
 
-    my $req = ua->request('https://ip-ranges.amazonaws.com/ip-ranges.json')
+    my $req = $ua->request('https://ip-ranges.amazonaws.com/ip-ranges.json')
     ->then(sub {
         ....
     });
@@ -30,7 +34,7 @@ URL so that they will go through one Future:
 
     my $url = 'https://ip-ranges.amazonaws.com/ip-ranges.json';
     my $res = shared_resource( \$requests{ $url } )->fetch( sub {
-        ua->request($url)
+        $ua->request($url)
     })->then( sub {
         ...
     });

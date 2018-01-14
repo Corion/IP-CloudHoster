@@ -1,0 +1,29 @@
+
+[![Build Status](https://travis-ci.org/Corion/WWW-Mechanize-Chrome.svg?branch=master)](https://github.com/Corion/WWW-Mechanize-Chrome)
+
+# NAME
+
+IP::CloudHoster -  Determine VPSes and cloud hosting machines via their IP address
+
+# SYNOPSIS
+
+    my $ipranges = IP::CloudHoster->new();
+    if( my $info = $id->identify( $ip )->get ) {
+        print "$ip belongs to " . $info->provider;
+    } else {
+        print "$ip doesn't belong to a known cloud hoster";
+    }
+
+## `->identify( $ip )->get`
+
+    my $info = $id->identify( $ip )->get;
+    print "$ip belongs to " . $info->provider;
+
+# SOURCES
+
+    https://cloud.google.com/compute/docs/faq#ipranges (DNS)
+    Cloudflare
+
+Microsoft Azure
+
+    https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653

@@ -84,7 +84,7 @@ sub parse_ip_ranges( $self, $json ) {
         push @ip_ranges, $entry;
     };
 
-    $self->_aws_ip_ranges( $ip_ranges );
+    $self->_aws_ip_ranges( \@ip_ranges );
     return $self->_aws_ip_ranges();
 }
 
@@ -113,7 +113,7 @@ sub identify( $self, $ip, %options ) {
         my( $ip_ranges ) = @_;
 
         for my $prefix (@$ip_ranges) {
-            if( $prefix->{range}->match( $ip ) {
+            if( $prefix->{range}->match( $ip )) {
                 return $prefix
             };
         };

@@ -4,6 +4,8 @@ use Module::Pluggable instantiate => 'new';
 use Moo;
 use Future;
 
+our $VERSION = '0.01';
+
 =head1 NAME
 
 IP::CloudHoster -  Determine VPSes and cloud hosting machines via their IP address

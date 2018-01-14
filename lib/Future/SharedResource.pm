@@ -1,5 +1,9 @@
 package Future::SharedResource;
 use strict;
+use Filter::signatures;
+no warnings 'experimental::signatures';
+use feature 'signatures';
+
 use Future;
 use Exporter 'import';
 use vars qw(@EXPORT_OK);
@@ -90,9 +94,7 @@ use fancy object syntax.
 
 =cut
 
-sub fetch_shared_resource {
-    my( $singleton_ref, $fetch ) = @_;
-
+sub fetch_shared_resource( $singleton_ref, $fetch ) {
     my $res;
     if( $$singleton_ref ) {
         $res = ${$singleton_ref}->transform()

@@ -21,8 +21,8 @@ has 'aws_ip_range_url' => (
 has 'ua' => (
     is => 'lazy',
     default => sub {
-        require HTTP::Future;
-        HTTP::Future->new(),
+        require Future::HTTP;
+        Future::HTTP->new(),
     },
 );
 
@@ -65,7 +65,7 @@ sub ip_ranges_json( $self, %options ) {
         )->then( sub {
             my( $body, $headers ) = @_;
             my $json = decode_json( $body );
-            $json
+            Future->done( $json )
         });
     };
 
@@ -85,7 +85,7 @@ sub parse_ip_ranges( $self, $json ) {
     };
 
     $self->_aws_ip_ranges( \@ip_ranges );
-    return $self->_aws_ip_ranges();
+    return Future->done( $self->_aws_ip_ranges() );
 }
 
 sub ip_ranges( $self, %options ) {
@@ -98,10 +98,8 @@ sub ip_ranges( $self, %options ) {
     } else {
         $res = $self->ip_ranges_json(
             %options
-        )->then( sub {
-            my( $body, $headers ) = @_;
-            my $json = decode_json( $body );
-            $self->parse_ip_ranges( $json );
+        )->then( sub( $data ) {
+            $self->parse_ip_ranges( $data );
         });
     };
 
@@ -114,11 +112,11 @@ sub identify( $self, $ip, %options ) {
 
         for my $prefix (@$ip_ranges) {
             if( $prefix->{range}->match( $ip )) {
-                return $prefix
+                return Future->done( $prefix )
             };
         };
 
-        return()
+        return(Future->done)
     });
 }
 

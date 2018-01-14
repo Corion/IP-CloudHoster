@@ -4,6 +4,21 @@ use Module::Pluggable instantiate => 'new';
 use Moo;
 use Future;
 
+=head1 NAME
+
+IP::CloudHoster -  Determine VPSes and cloud hosting machines via their IP address
+
+=head1 SYNOPSIS
+
+  my $ipranges = IP::CloudHoster->new();
+  if( my $info = $id->identify( $ip )->get ) {
+      print "$ip belongs to " . $info->provider;
+  } else {
+      print "$ip doesn't belong to a known cloud hoster";
+  }
+
+=cut
+
 has plugins => (
     is => 'ro',
     default => sub { [ $class->plugins ] },

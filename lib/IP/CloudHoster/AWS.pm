@@ -1,10 +1,10 @@
 package IP::CloudHoster::AWS;
 use strict;
+use Moo 2;
 use Filter::signatures;
 no warnings 'experimental::signatures';
 use feature 'signatures';
 
-use Moo 2;
 use Future;
 use Net::Netmask;
 use JSON::XS 'decode_json';

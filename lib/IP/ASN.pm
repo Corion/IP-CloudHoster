@@ -1,14 +1,30 @@
 package IP::ASN;
 use strict;
 use Carp 'croak';
-use Net::IRR;
+use Future;
+use Moo 2;
 no warnings 'experimental';
 use Filter::signatures;
 use feature 'signatures';
-use Future;
-use Moo 2;
+use Net::IRR;
 
-# Get the IP ranges associated with an autonomous system number (ASN)
+our $VERSION = '0.01';
+
+=head1 NAME
+
+IP::ASN - Get the IP ranges associated with an autonomous system number (ASN)
+
+=head1 SYNOPSIS
+
+  my $ranges = IP::ASN->new();
+  my $facebook = 'as32934';
+  $ranges->get_range( $facebook )->then(sub {
+      my (@ranges) = @_;
+      # '204.15.20.0/22', ...
+      ...
+  })
+
+=cut
 
 sub get_range($class, %options) {
     croak "Need an ASN to query"

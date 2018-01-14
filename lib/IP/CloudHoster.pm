@@ -63,7 +63,7 @@ L<https://cloud.google.com/compute/docs/faq#ipranges> (DNS)
 
 =head2 Microsoft Azure
 
-L<https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653>
+L<https://www.microsoft.com/en-us/download/details.aspx?id=41653>
 
 =cut
 

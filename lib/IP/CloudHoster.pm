@@ -1,6 +1,9 @@
 package IP::CloudHoster;
 use strict;
-use Module::Pluggable instantiate => 'new', sub_name => 'class_plugins';
+use Module::Pluggable
+    instantiate => 'new',
+    search_path => 'IP::CloudHoster',
+    sub_name => 'class_plugins';
 use Moo;
 use Future;
 

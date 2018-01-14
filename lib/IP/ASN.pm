@@ -24,6 +24,29 @@ IP::ASN - Get the IP ranges associated with an autonomous system number (ASN)
       ...
   })
 
+=head1 FUNCTIONS
+
+=head2 C<< get_range >>
+
+  get_range('as32934')->then(sub {
+      my( $ranges ) = @_;
+
+      my @entries;
+      for my $mask (@$ranges) {
+          my $entry = {
+              provider => 'facebook',
+              range => Net::Netmask->new( $mask ),
+          };
+          push @entries, $entry;
+      };
+      Future->done( @entries )
+  })
+
+The function returns a Future that returns all prefixes associated with the
+ASN as found via L<Net::IRR>.
+
+You should likely rate-limit access to the C<< get_range >> function.
+
 =cut
 
 sub get_range($class, %options) {
@@ -42,6 +65,8 @@ sub get_range($class, %options) {
 =head1 SEE ALSO
 
 L<http://www.team-cymru.org/IP-ASN-mapping.html> - this would be a lookup using DNS
+
+L<Net::IRR>
 
 =cut
 

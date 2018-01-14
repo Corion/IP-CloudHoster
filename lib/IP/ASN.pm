@@ -28,7 +28,7 @@ IP::ASN - Get the IP ranges associated with an autonomous system number (ASN)
 
 =head2 C<< get_range >>
 
-  get_range('as32934')->then(sub {
+  get_range(asn => 'as32934')->then(sub {
       my( $ranges ) = @_;
 
       my @entries;

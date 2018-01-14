@@ -10,10 +10,8 @@ use Net::Netmask;
 use JSON::XS 'decode_json';
 use Future::SharedResource 'shared_resource';
 
-use vars qw($VERSION $aws_ip_range_url);
-$VERSION = '0.01';
-
-$aws_ip_range_url = 'https://ip-ranges.amazonaws.com/ip-ranges.json';
+our $VERSION = '0.01';
+our $aws_ip_range_url = 'https://ip-ranges.amazonaws.com/ip-ranges.json';
 
 has 'aws_ip_range_url' => (
     is => 'rw',

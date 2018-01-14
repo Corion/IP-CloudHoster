@@ -1,6 +1,6 @@
 #!perl -w
 use strict;
-use Test::More tests => 3;
+use Test::More tests => 4;
 use Data::Dumper;
 
 use IP::CloudHoster;
@@ -15,3 +15,9 @@ my $info = $ch->identify( $ip )->get;
 ok $info, "We found information on $ip";
 
 is $info->{provider}, 'amazon', "Netflix.com is hosted by Amazon";
+
+my $ip = '127.0.0.1';
+
+$info = $ch->identify( $ip )->get;
+
+is $info, undef, "localhost is not a cloud provider";

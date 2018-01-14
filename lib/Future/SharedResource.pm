@@ -9,6 +9,8 @@ use Exporter 'import';
 use vars qw(@EXPORT_OK);
 @EXPORT_OK = qw(&shared_resource &make_shared_resource);
 
+our $VERSION = '0.01';
+
 =head1 NAME
 
 Future::SharedResource - satisfy multiple requests for a resource as one

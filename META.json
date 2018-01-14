@@ -1,0 +1,68 @@
+{
+   "abstract" : "Determine VPSes and cloud hosting machines via their IP address",
+   "author" : [
+      "Max Maischein <corion@cpan.org>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "ExtUtils::MakeMaker version 7.24, CPAN::Meta::Converter version 2.150010",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : 2
+   },
+   "name" : "IP-CloudHoster",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "inc"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "0"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "0"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Carp" : "0",
+            "Exporter" : "5",
+            "Filter::signatures" : "0.09",
+            "Future" : "0",
+            "Future::HTTP" : "0.06",
+            "JSON" : "0",
+            "JSON::PP" : "0",
+            "Module::Pluggable" : "0",
+            "Moo" : "2",
+            "Net::IRR" : "0",
+            "Net::Netmask" : "0",
+            "perl" : "5.006"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "AnyEvent::Future" : "0",
+            "Data::Dumper" : "0",
+            "Test::More" : "0"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/Corion/IP-CloudHoster.git",
+         "web" : "https://github.com/Corion/IP-CloudHoster"
+      }
+   },
+   "version" : "0.01",
+   "x_serialization_backend" : "JSON::PP version 2.94",
+   "x_static_install" : 1
+}

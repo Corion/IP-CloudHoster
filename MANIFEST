@@ -1,4 +1,5 @@
 .gitignore
+Changes
 lib/Future/SharedResource.pm
 lib/IP/ASN.pm
 lib/IP/CloudHoster.pm
@@ -6,6 +7,8 @@ lib/IP/CloudHoster/AWS.pm
 Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP
+META.json
+META.yml
 README
 README.mkdn
 t/01-thundering-herd-multi.t

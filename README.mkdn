@@ -21,9 +21,14 @@ IP::CloudHoster -  Determine VPSes and cloud hosting machines via their IP addre
 
 # SOURCES
 
-    https://cloud.google.com/compute/docs/faq#ipranges (DNS)
-    Cloudflare
+## Amazon AWS
 
-Microsoft Azure
+[https://ip-ranges.amazonaws.com/ip-ranges.json](https://ip-ranges.amazonaws.com/ip-ranges.json)
 
-    https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653
+[https://cloud.google.com/compute/docs/faq#ipranges](https://cloud.google.com/compute/docs/faq#ipranges) (DNS)
+
+## Cloudflare
+
+## Microsoft Azure
+
+[https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653](https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653)

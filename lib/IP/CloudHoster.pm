@@ -50,12 +50,17 @@ sub identify {
 
 =head1 SOURCES
 
-    https://cloud.google.com/compute/docs/faq#ipranges (DNS)
-    Cloudflare
+=head2 Amazon AWS
 
-Microsoft Azure
+L<https://ip-ranges.amazonaws.com/ip-ranges.json>
 
-  https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653
+L<https://cloud.google.com/compute/docs/faq#ipranges> (DNS)
+
+=head2 Cloudflare
+
+=head2 Microsoft Azure
+
+L<https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653>
 
 =cut
 

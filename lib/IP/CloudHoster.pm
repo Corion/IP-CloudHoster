@@ -1,6 +1,6 @@
 package IP::CloudHoster;
 use strict;
-use Module::Pluggable instantiate => 'new';
+use Module::Pluggable instantiate => 'new', sub_name => 'class_plugins';
 use Moo;
 use Future;
 
@@ -23,7 +23,7 @@ IP::CloudHoster -  Determine VPSes and cloud hosting machines via their IP addre
 
 has plugins => (
     is => 'ro',
-    default => sub { [ $class->plugins ] },
+    default => sub { [ __PACKAGE__->class_plugins ] },
 );
 
 =head2 C<< ->identify( $ip )->get >>

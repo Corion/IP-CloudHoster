@@ -8,7 +8,7 @@ IP::CloudHoster -  Determine VPSes and cloud hosting machines via their IP addre
 # SYNOPSIS
 
     my $ipranges = IP::CloudHoster->new();
-    if( my $info = $id->identify( $ip )->get ) {
+    if( my $info = $id->identify( $ip )->get()) {
         print "$ip belongs to " . $info->provider;
     } else {
         print "$ip doesn't belong to a known cloud hoster";

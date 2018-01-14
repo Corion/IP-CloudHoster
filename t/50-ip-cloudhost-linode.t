@@ -20,7 +20,5 @@ if( my $info = $ch->identify( $ip )->get) {
 	fail "localhost is not a cloud provider";
 	diag Dumper $info;
 } else {
-	ok "localhost is not a cloud provider";
+	pass "localhost is not a cloud provider";
 };
-
-

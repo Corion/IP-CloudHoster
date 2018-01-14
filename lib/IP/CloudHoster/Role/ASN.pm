@@ -6,24 +6,38 @@ use Filter::signatures;
 use feature 'signatures';
 
 use Future;
+use Future::SharedResource 'shared_resource';
 
 has 'ip_range' => (
     is => 'lazy',
     default => sub { require IP::ASN; IP::ASN->new(); },
 );
 
+has '_ip_ranges' => (
+    is => 'rw',
+);
+
 requires 'asn';
 requires 'provider';
 
 sub ip_ranges( $self, %options ) {
-    Future->wrap( $self->ip_range()->get_range( asn => $self->asn, %options ))
+    if( $self->{_ip_ranges}) {
+        return Future->done( $self->{_ip_ranges} );
+    };
+
+    shared_resource( \${ $self->{_ip_ranges}} )->fetch( sub {
+        $self->ip_range()->get_range( asn => $self->asn, %options )
+    })->on_done(sub {
+        $self->{_ip_ranges} = $_[0];
+        Future->done( @_ );
+    });
 }
 
 sub identify( $self, $ip, %options ) {
     $ip = NetAddr::IP->new( $ip );
     $self->ip_ranges( %options )->then(sub {
         my( $ip_ranges ) = @_;
-        
+
         for my $prefix (@$ip_ranges) {
             my $p = NetAddr::IP->new( $prefix );
             if( $ip->within( $p )) {

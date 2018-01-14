@@ -19,8 +19,8 @@ IP::ASN - Get the IP ranges associated with an autonomous system number (ASN)
   my $ranges = IP::ASN->new();
   my $facebook = 'as32934';
   $ranges->get_range( $facebook )->then(sub {
-      my (@ranges) = @_;
-      # '204.15.20.0/22', ...
+      my ($ranges) = @_;
+      # $ranges->[0] eq '204.15.20.0/22', ...
       ...
   })
 
@@ -36,7 +36,7 @@ sub get_range($class, %options) {
     my @results = $options{ irr }->get_routes_by_origin($asn);
     push @results, $options{ irr }->get_ipv6_routes_by_origin($asn);
 
-    Future->done(@results)
+    Future->done(\@results)
 }
 
 =head1 SEE ALSO

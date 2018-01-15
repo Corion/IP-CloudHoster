@@ -3,7 +3,8 @@ use strict;
 use Module::Pluggable
     instantiate => 'new',
     search_path => 'IP::CloudHoster',
-    sub_name => 'class_plugins';
+    sub_name => 'class_plugins',
+    except => [qw[IP::CloudHoster::Role::ASN IP::CloudHoster::Info]];
 use Moo;
 use Future;
 

@@ -11,7 +11,7 @@ my $ip = join ".", unpack 'C4', gethostbyname( 'howtogeek.com' );
 
 ok $ip, "We found an IP for 'howtogeek.com'";
 my $info = $ch->identify( $ip )->get;
-ok $info, "We found information on $ip";
+isa_ok $info, 'IP::CloudHoster::Info', "We found information on $ip";
 is $info->{provider}, 'linode', "howtogeek.com is hosted by Linode";
 
 $ip = '127.0.0.1';

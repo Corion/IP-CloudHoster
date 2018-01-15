@@ -4,6 +4,7 @@ use Moo::Role;
 no warnings 'experimental';
 use Filter::signatures;
 use feature 'signatures';
+use IP::CloudHoster::Info;
 
 use Future;
 use Future::SharedResource 'shared_resource';
@@ -41,10 +42,10 @@ sub identify( $self, $ip, %options ) {
         for my $prefix (@$ip_ranges) {
             my $p = NetAddr::IP->new( $prefix );
             if( $ip->within( $p )) {
-                return Future->done({
+                return Future->done(IP::CloudHoster::Info->new({
                     provider => $self->provider,
                     range => $prefix,
-                })
+                }))
             };
         };
 
@@ -53,3 +54,12 @@ sub identify( $self, $ip, %options ) {
 }
 
 1;
+
+=head1 SEE ALSO
+
+L<http://www.team-cymru.org/IP-ASN-mapping.html> - this would be a lookup using DNS
+
+This database is not yet what we use to determine the ASN of an IP address. This
+might be better (or worse) than using L<Net::IRR>
+
+=cut

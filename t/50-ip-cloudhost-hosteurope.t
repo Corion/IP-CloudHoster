@@ -16,7 +16,7 @@ my $ip = join ".", unpack 'C4', gethostbyname( 'datenzoo.de' );
 ok $ip, "We found an IP for 'datenzoo.de'";
 my $info = $ch->identify( $ip )->get;
 
-ok $info, "We found information on $ip";
+isa_ok $info, 'IP::CloudHoster::Info', "We found information on $ip";
 
 is $info->{provider}, 'hosteurope', "datenzoo.de is hosted by hosteurope";
 

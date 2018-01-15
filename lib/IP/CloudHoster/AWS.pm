@@ -7,6 +7,7 @@ use feature 'signatures';
 
 use Future;
 use NetAddr::IP;
+use IP::CloudHoster::Info;
 use JSON::XS 'decode_json';
 use Future::SharedResource 'shared_resource';
 
@@ -113,7 +114,7 @@ sub identify( $self, $ip, %options ) {
 
         for my $prefix (@$ip_ranges) {
             if( $ip->within( $prefix->{range})) {
-                return Future->done( $prefix )
+                return Future->done(IP::CloudHoster::Info->new($prefix))
             };
         };
 

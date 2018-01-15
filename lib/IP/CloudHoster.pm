@@ -58,9 +58,13 @@ sub identify {
 
 L<https://ip-ranges.amazonaws.com/ip-ranges.json>
 
+=head2 Google
+
 L<https://cloud.google.com/compute/docs/faq#ipranges> (DNS)
 
 =head2 Cloudflare
+
+L<https://www.cloudflare.com/ips/>
 
 =head2 Microsoft Azure
 

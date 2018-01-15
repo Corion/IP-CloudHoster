@@ -4,7 +4,9 @@ lib/Future/SharedResource.pm
 lib/IP/ASN.pm
 lib/IP/CloudHoster.pm
 lib/IP/CloudHoster/AWS.pm
+lib/IP/CloudHoster/Azure.pm
 lib/IP/CloudHoster/HostEurope.pm
+lib/IP/CloudHoster/Info.pm
 lib/IP/CloudHoster/Linode.pm
 lib/IP/CloudHoster/Role/ASN.pm
 Makefile.PL
@@ -17,6 +19,7 @@ README.mkdn
 t/01-thundering-herd-multi.t
 t/01-thundering-herd.t
 t/50-ip-cache-asn.t
+t/50-ip-cloudhost-azure.t
 t/50-ip-cloudhost-hosteurope.t
 t/50-ip-cloudhost-linode.t
 t/50-ip-cloudhost-netflix.t

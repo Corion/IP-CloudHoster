@@ -51,11 +51,12 @@ my %module = (
         'Future'             => 0,
 
         'Future::HTTP'       => 0.06, # fixes Mojolicious error handling
-        'JSON'               => 0,
+        'JSON'               => 0, # for AWS
         'JSON::PP'           => 0, # for JSON::PP::true and JSON::PP::false
         'Moo'                => 2, # for some hashes-as-objects
 
         'NetAddr::IP'        => 0,
+        'XML::LibXML'        => 0, # for Azure
         'Net::IRR'           => 0,
     },
     TEST_REQUIRES => {

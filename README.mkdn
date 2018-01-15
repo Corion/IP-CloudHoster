@@ -31,4 +31,4 @@ IP::CloudHoster -  Determine VPSes and cloud hosting machines via their IP addre
 
 ## Microsoft Azure
 
-[https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653](https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653)
+[https://www.microsoft.com/en-us/download/details.aspx?id=41653](https://www.microsoft.com/en-us/download/details.aspx?id=41653)

@@ -55,7 +55,7 @@ my %module = (
         'JSON::PP'           => 0, # for JSON::PP::true and JSON::PP::false
         'Moo'                => 2, # for some hashes-as-objects
 
-        'Net::Netmask'       => 0,
+        'NetAddr::IP'        => 0,
         'Net::IRR'           => 0,
     },
     TEST_REQUIRES => {

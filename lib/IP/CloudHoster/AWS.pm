@@ -6,7 +6,7 @@ no warnings 'experimental::signatures';
 use feature 'signatures';
 
 use Future;
-use Net::Netmask;
+use NetAddr::IP;
 use JSON::XS 'decode_json';
 use Future::SharedResource 'shared_resource';
 
@@ -78,7 +78,7 @@ sub parse_ip_ranges( $self, $json ) {
         my $entry = {
             %$e,
             provider => 'amazon',
-            range => Net::Netmask->new( $e->{ ip_prefix } ),
+            range => NetAddr::IP->new( $e->{ ip_prefix } ),
         };
 
         push @ip_ranges, $entry;
@@ -107,11 +107,12 @@ sub ip_ranges( $self, %options ) {
 }
 
 sub identify( $self, $ip, %options ) {
+    $ip = NetAddr::IP->new( $ip );
     $self->ip_ranges( %options )->then(sub {
         my( $ip_ranges ) = @_;
 
         for my $prefix (@$ip_ranges) {
-            if( $prefix->{range}->match( $ip )) {
+            if( $ip->within( $prefix )) {
                 return Future->done( $prefix )
             };
         };

@@ -35,7 +35,7 @@ IP::ASN - Get the IP ranges associated with an autonomous system number (ASN)
       for my $mask (@$ranges) {
           my $entry = {
               provider => 'facebook',
-              range => Net::Netmask->new( $mask ),
+              range => NetAddr::IP->new( $mask ),
           };
           push @entries, $entry;
       };
@@ -62,6 +62,8 @@ sub get_range($class, %options) {
     Future->done(\@results)
 }
 
+1;
+
 =head1 SEE ALSO
 
 L<http://www.team-cymru.org/IP-ASN-mapping.html> - this would be a lookup using DNS
@@ -69,7 +71,3 @@ L<http://www.team-cymru.org/IP-ASN-mapping.html> - this would be a lookup using 
 L<Net::IRR>
 
 =cut
-
-package CloudHoster::ASN;
-
-1;

@@ -1,4 +1,4 @@
-package IP::CloudHoster::AWS;
+package IP::CloudHoster::Cloudflare;
 use strict;
 use Moo 2;
 use Filter::signatures;
@@ -12,11 +12,14 @@ use JSON::XS 'decode_json';
 use Future::SharedResource 'shared_resource';
 
 our $VERSION = '0.01';
-our $aws_ip_range_url = 'https://ip-ranges.amazonaws.com/ip-ranges.json';
+our @ip_range_urls = qw(
+    https://www.cloudflare.com/ips-v4
+    https://www.cloudflare.com/ips-v6
+);
 
-has 'aws_ip_range_url' => (
-    is => 'rw',
-    default => $aws_ip_range_url,
+has 'ip_range_urls' => (
+    is => 'lazy',
+    default => sub { [@ip_range_urls]},
 );
 
 has 'ua' => (
@@ -33,71 +36,81 @@ has 'inflight_requests' => (
     default => sub { {} },
 );
 
-has '_aws_ip_ranges' => (
+has '_ip_ranges' => (
     is => 'rw',
 );
 
 # Also, can we turn the UA into a queueing resource with a similar
 # approach?
 
-sub retrieve_aws_ips( $self, $address, $ua ) {
+sub retrieve_ips( $self, $address, $ua ) {
     # Should we canonicalize $address?
 
     # Only request the resource once, even if there are multiple calls
     # while the request is still outstanding
-    shared_resource(\($self->inflight_requests->{ $address }))
-    ->fetch( sub { $ua->http_get( $address ) })
+    Future->wait_all(
+        map {
+            shared_resource(\($self->inflight_requests->{ $_ }))
+            ->fetch( sub { $ua->http_get( $_ ) })
+        } @{ $self->ip_range_urls }
+    )->then(sub( @fetched ) {
+        my $result = '';
+        for my $item (@fetched) {
+            my( $body, $headers) = $item->get;
+            $result .= $body;
+        };
+        Future->done( $result )
+    });
 }
 
-sub ip_ranges_json( $self, %options ) {
+sub ip_ranges_text( $self, %options ) {
     my $res;
 
     $options{ ua } ||= $self->ua;
-    $options{ aws_ip_range_url } ||= $self->aws_ip_range_url;
+    $options{ ip_range_urls } ||= $self->ip_range_urls;
 
-    my $r = $self->_aws_ip_ranges;
+    my $r = $self->_ip_ranges;
     if( $r ) {
         $res = Future->done( $r )
 
     } else {
-        $res = $self->retrieve_aws_ips(
+        $res = $self->retrieve_ips(
             $options{ aws_ip_range_url },
             $options{ ua }
         )->then( sub {
             my( $body, $headers ) = @_;
-            my $json = decode_json( $body );
-            Future->done( $json )
+            my $list = [split /\s*\n/, $body];
+            Future->done( $list )
         });
     };
 
     $res
 }
 
-sub parse_ip_ranges( $self, $json ) {
+sub parse_ip_ranges( $self, $list ) {
     my @ip_ranges;
-    for my $e (@{ $json->{prefixes} }) {
+    for my $e (@{ $list }) {
         my $entry = {
-            %$e,
-            provider => 'amazon',
-            range => NetAddr::IP->new( $e->{ ip_prefix } ),
+            provider => 'cloudflare',
+            range => NetAddr::IP->new( $e ),
         };
 
         push @ip_ranges, $entry;
     };
 
-    $self->_aws_ip_ranges( \@ip_ranges );
-    return Future->done( $self->_aws_ip_ranges() );
+    $self->_ip_ranges( \@ip_ranges );
+    return Future->done( $self->_ip_ranges() );
 }
 
 sub ip_ranges( $self, %options ) {
     my $res;
 
-    my $r = $self->_aws_ip_ranges;
+    my $r = $self->_ip_ranges;
     if( $r ) {
         $res = Future->done( $r )
 
     } else {
-        $res = $self->ip_ranges_json(
+        $res = $self->ip_ranges_text(
             %options
         )->then( sub( $data ) {
             $self->parse_ip_ranges( $data );
@@ -122,4 +135,12 @@ sub identify( $self, $ip, %options ) {
     });
 }
 
-1
+1;
+
+=head1 SEE ALSO
+
+L<https://www.cloudflare.com/ips-v4>
+
+L<https://www.cloudflare.com/ips-v6>
+
+=cut

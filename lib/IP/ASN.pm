@@ -71,3 +71,5 @@ L<http://www.team-cymru.org/IP-ASN-mapping.html> - this would be a lookup using 
 L<Net::IRR>
 
 =cut
+
+1;

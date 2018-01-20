@@ -8,7 +8,7 @@ IP::CloudHoster -  Determine VPSes and cloud hosting machines via their IP addre
 # SYNOPSIS
 
     my $ipranges = IP::CloudHoster->new();
-    if( my $info = $id->identify( $ip )->get ) {
+    if( my $info = $id->identify( $ip )->get()) {
         print "$ip belongs to " . $info->provider;
     } else {
         print "$ip doesn't belong to a known cloud hoster";
@@ -25,10 +25,14 @@ IP::CloudHoster -  Determine VPSes and cloud hosting machines via their IP addre
 
 [https://ip-ranges.amazonaws.com/ip-ranges.json](https://ip-ranges.amazonaws.com/ip-ranges.json)
 
+## Google
+
 [https://cloud.google.com/compute/docs/faq#ipranges](https://cloud.google.com/compute/docs/faq#ipranges) (DNS)
 
 ## Cloudflare
 
+[https://www.cloudflare.com/ips/](https://www.cloudflare.com/ips/)
+
 ## Microsoft Azure
 
-[https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653](https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653)
+[https://www.microsoft.com/en-us/download/details.aspx?id=41653](https://www.microsoft.com/en-us/download/details.aspx?id=41653)

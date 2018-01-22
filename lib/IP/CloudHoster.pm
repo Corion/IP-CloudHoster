@@ -62,6 +62,10 @@ L<https://ip-ranges.amazonaws.com/ip-ranges.json>
 
 L<https://cloud.google.com/compute/docs/faq#ipranges> (DNS)
 
+=head2 GoogleBot
+
+L<https://support.google.com/webmasters/answer/80553> (DNS)
+
 =head2 Cloudflare
 
 L<https://www.cloudflare.com/ips/>

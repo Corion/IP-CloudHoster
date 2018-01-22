@@ -29,6 +29,10 @@ IP::CloudHoster -  Determine VPSes and cloud hosting machines via their IP addre
 
 [https://cloud.google.com/compute/docs/faq#ipranges](https://cloud.google.com/compute/docs/faq#ipranges) (DNS)
 
+## GoogleBot
+
+[https://support.google.com/webmasters/answer/80553](https://support.google.com/webmasters/answer/80553) (DNS)
+
 ## Cloudflare
 
 [https://www.cloudflare.com/ips/](https://www.cloudflare.com/ips/)

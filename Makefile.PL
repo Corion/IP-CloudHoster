@@ -56,8 +56,8 @@ my %module = (
         'Moo'                => 2, # for some hashes-as-objects
 
         'NetAddr::IP'        => 0,
+        'Net::IRR'           => 0, # for ASN lookups        
         'XML::LibXML'        => 0, # for Azure
-        'Net::IRR'           => 0,
     },
     TEST_REQUIRES => {
         'Test::More'       => 0,

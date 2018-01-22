@@ -21,7 +21,7 @@ Future::SharedResource - satisfy multiple requests for a resource as one
     my $res = shared_resource( \$requests{ $url } )->fetch( sub {
         $ua->request($url)
     })->then( sub {
-        ...
+        # ...
     });
 
 =head1 THUNDERING HERD
@@ -32,7 +32,7 @@ successful response:
 
     my $req = $ua->request('https://ip-ranges.amazonaws.com/ip-ranges.json')
     ->then(sub {
-        ....
+        # ...
     });
 
 The solution to prevent the Thundering Herd is to accumulate all requests to the
@@ -42,7 +42,7 @@ URL so that they will go through one Future:
     my $res = shared_resource( \$requests{ $url } )->fetch( sub {
         $ua->request($url)
     })->then( sub {
-        ...
+        # ...
     });
     
 =head1 EXPORTED FUNCTIONS
@@ -50,9 +50,9 @@ URL so that they will go through one Future:
 =head2 C<< shared_resource >>
 
     my $res = shared_resource( \$resources{ $key } )->fetch( sub {
-        ... # fetch the resource
+        # fetch the resource
     })->then( sub {
-        ... # handle the result
+        # handle the result
     })
 
 This function call ensures that only one request to the shared resource
@@ -86,7 +86,7 @@ sub shared_resource {
 
     my $f = fetch_shared_resource( \$singleton,
         sub {
-            ... # fetch the resource
+            # fetch the resource
         }
     )->then(sub {
     })

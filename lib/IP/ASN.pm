@@ -21,7 +21,7 @@ IP::ASN - Get the IP ranges associated with an autonomous system number (ASN)
   $ranges->get_range( $facebook )->then(sub {
       my ($ranges) = @_;
       # $ranges->[0] eq '204.15.20.0/22', ...
-      ...
+      print "$_\n" for @$ranges
   })
 
 =head1 FUNCTIONS

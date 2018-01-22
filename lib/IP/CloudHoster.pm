@@ -41,12 +41,22 @@ sub identify {
     my( $self, $ip, %options ) = @_;
 
     # we'll return the first future that responds favourably
-    my $res = Future->new();
-    my $f = Future->needs_any(
+    use AnyEvent::Future;
+    my $res = AnyEvent::Future->new();
+    my $f; $f = Future->needs_any(
         map {
-            $_->identify( $ip, %options )
+            #my $n = $_;
+            #warn "$n launched";
+            $_->identify( $ip, %options )->on_ready(sub {
+                #if( $_[0]->is_ready ) {
+                #    warn "$n ready";
+                #} else {
+                #    warn "$n failed";
+                #};
+            });
         } @{ $self->plugins }
     )->on_fail(sub {
+        undef $f;
         $res->done()
     })->on_done($res);
     return $res

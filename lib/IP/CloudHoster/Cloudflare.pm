@@ -8,7 +8,6 @@ use feature 'signatures';
 use Future;
 use NetAddr::IP;
 use IP::CloudHoster::Info;
-use JSON::XS 'decode_json';
 use Future::SharedResource 'shared_resource';
 
 our $VERSION = '0.01';

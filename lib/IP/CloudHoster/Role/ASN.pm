@@ -1,8 +1,8 @@
 package IP::CloudHoster::Role::ASN;
 use strict;
 use Moo::Role;
-no warnings 'experimental';
 use Filter::signatures;
+no warnings 'experimental::signatures';
 use feature 'signatures';
 use IP::CloudHoster::Info;
 

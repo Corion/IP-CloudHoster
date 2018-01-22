@@ -3,8 +3,8 @@ use strict;
 use Carp 'croak';
 use Future;
 use Moo 2;
-no warnings 'experimental';
 use Filter::signatures;
+no warnings 'experimental::signatures';
 use feature 'signatures';
 use Net::IRR;
 

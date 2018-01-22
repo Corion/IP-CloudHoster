@@ -7,7 +7,6 @@ use IP::CloudHoster;
 
 use NetAddr::IP;
 my $dz = NetAddr::IP->new( '83.169.23.242/32' );
-warn $dz->within(NetAddr::IP->new('83.169.16.0/21'));
 
 my $ch = IP::CloudHoster->new();
 

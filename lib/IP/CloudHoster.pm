@@ -62,6 +62,10 @@ sub identify {
     return $res
 }
 
+=head1 SEE ALSO
+
+L<Robots::Validate> - check if a given UA actually is a (search index) bot
+
 =head1 SOURCES
 
 =head2 Amazon AWS

@@ -75,7 +75,7 @@ sub ip_ranges_json( $self, %options ) {
 
 sub parse_ip_ranges( $self, $json ) {
     my @ip_ranges;
-    for my $e (@{ $json->{prefixes} }) {
+    for my $e (@{$json->{prefixes} }) {
         my $entry = {
             %$e,
             provider => 'amazon',
@@ -118,7 +118,7 @@ sub identify( $self, $ip, %options ) {
             };
         };
 
-        return Future->fail()
+        return Future->fail( "notfound", "ip" => $ip );
     });
 }
 

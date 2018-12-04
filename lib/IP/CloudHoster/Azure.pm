@@ -144,14 +144,13 @@ sub identify( $self, $ip, %options ) {
     $ip = NetAddr::IP->new( $ip );
     $self->ip_ranges( %options )->then(sub {
         my( $ip_ranges ) = @_;
-
         for my $prefix (@$ip_ranges) {
             if( $ip->within( $prefix->{range})) {
                 return Future->done( $prefix )
             };
         };
 
-        return Future->fail()
+        return Future->fail( "notfound", "ip" => $ip );
     });
 }
 

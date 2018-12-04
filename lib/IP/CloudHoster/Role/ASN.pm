@@ -49,7 +49,7 @@ sub identify( $self, $ip, %options ) {
             };
         };
 
-        return Future->fail;
+        return Future->fail( "notfound", "ip" => $ip );
     });
 }
 

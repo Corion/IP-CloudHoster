@@ -5,6 +5,7 @@ no warnings 'experimental::signatures';
 use feature 'signatures';
 
 use Future;
+use Future::Mutex;
 use Exporter 'import';
 use vars qw(@EXPORT_OK);
 @EXPORT_OK = qw(&shared_resource &make_shared_resource);
@@ -44,7 +45,7 @@ URL so that they will go through one Future:
     })->then( sub {
         # ...
     });
-    
+
 =head1 EXPORTED FUNCTIONS
 
 =head2 C<< shared_resource >>
@@ -64,6 +65,8 @@ This prevents making multiple requests for the same cached resource just
 after the resource cache time has expired ("Thundering Herd").
 
 The subroutine passed to the C<< ->fetch >> method must return a future.
+The subroutine itself must not request the same shared resource again before
+it returns.
 
 The reference passed to the function is used by C<< shared_resource >>
 to recognize requests for a common resource. For example for HTTP requests,
@@ -96,16 +99,28 @@ use fancy object syntax.
 
 =cut
 
+# This is basically a Future::Mutex with the tiny difference that things that
+# come in while the "running" Future is not complete will share the result of
+# that Future instead of getting run afterwards.
+
 sub fetch_shared_resource( $singleton_ref, $fetch ) {
     my $res;
-    if( $$singleton_ref ) {
-        $res = ${$singleton_ref}->transform()
-
+    my $handler = $$singleton_ref;
+    if( $handler ) {
+        $res = $handler->transform();
     } else {
-        $$singleton_ref = Future->wrap( $fetch->() );
-        $res = ${$singleton_ref}->transform(
-            done => sub{ undef $$singleton_ref; @_ }
-        );
+        ${$singleton_ref} = $fetch->();
+
+        # Maybe we should short-circuit here in the case where $$singleton_ref
+        # already ->is_ready.
+
+        $res = ${$singleton_ref}->transform();
+
+        # We want to clean up once our fetch-future is ready
+        # This might destroy reference loops too early :-/
+        ${$singleton_ref}->on_ready(sub {
+            undef ${$singleton_ref};
+        });
     };
 
     $res
@@ -140,3 +155,9 @@ sub fetch {
 }
 
 1;
+
+=head1 SEE ALSO
+
+L<Future::Mutex> - for serial access instead of shared access
+
+=cut

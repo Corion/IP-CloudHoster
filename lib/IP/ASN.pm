@@ -55,9 +55,15 @@ sub get_range($class, %options) {
     $options{ hostname } ||= 'whois.radb.net';
     $options{ irr } ||= Net::IRR->connect( host => $options{ hostname })
         or die "can't connect to $options{ hostname }: $?"; # let's hope that $? is still valid
-    my $asn = $options{ asn };
-    my @results = $options{ irr }->get_routes_by_origin($asn);
-    push @results, $options{ irr }->get_ipv6_routes_by_origin($asn);
+    my $asns = $options{ asn };
+    if( ! ref $asns or ref $asns ne 'ARRAY') {
+        $asns = [$asns]
+    };
+    my @results;
+    for my $asn (@$asns) {
+        push @results, $options{ irr }->get_routes_by_origin($asn);
+        push @results, $options{ irr }->get_ipv6_routes_by_origin($asn);
+    };
 
     Future->done(\@results)
 }

@@ -6,4 +6,6 @@ use constant 'provider' => 'hosteurope';
 
 with 'IP::CloudHoster::Role::ASN';
 
+our $VERSION = '0.01';
+
 1;

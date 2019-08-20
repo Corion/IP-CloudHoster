@@ -9,6 +9,8 @@ use IP::CloudHoster::Info;
 use Future;
 use Future::SharedResource 'shared_resource';
 
+our $VERSION = '0.01';
+
 has 'ip_range' => (
     is => 'lazy',
     default => sub { require IP::ASN; IP::ASN->new(); },

@@ -6,6 +6,8 @@ use Filter::signatures;
 no warnings 'experimental::signatures';
 use feature 'signatures';
 
+our $VERSION = '0.01';
+
 =head1 NAME
 
 IP::CloudHoster::Role::FileCache - cache HTTP resources locally

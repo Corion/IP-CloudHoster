@@ -134,6 +134,8 @@ are idempotent.
 package Future::SharedResource::Object;
 use strict;
 
+our $VERSION = '0.01';
+
 sub new {
     my( $class, $singleton_ref ) = @_;
     my $self = bless {

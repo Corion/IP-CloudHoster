@@ -10,6 +10,8 @@ use AnyEvent::Future;
 use AnyEvent::DNS;
 use Future::SharedResource 'shared_resource';
 
+our $VERSION = '0.01';
+
 # This is to prevent a thundering herd when multiple requests are made
 has 'inflight_requests' => (
     is => 'ro',

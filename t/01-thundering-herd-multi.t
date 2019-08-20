@@ -3,15 +3,15 @@ use strict;
 use Test::More tests => 12;
 
 use Future::SharedResource 'shared_resource';
-use AnyEvent::Future;
+use Future::IO;
 use Data::Dumper;
 
 my %fetched_times;
 sub fetch_info {
     my( $url, $result ) = @_;
     $fetched_times{ $url }++;
-    
-    my $f = AnyEvent::Future->new_delay( after => 5 )
+
+    my $f = Future::IO->sleep( 5 )
     ->then( sub {
         Future->done( $result )
     });

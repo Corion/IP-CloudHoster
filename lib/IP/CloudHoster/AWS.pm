@@ -114,7 +114,7 @@ sub identify( $self, $ip, %options ) {
 
         for my $prefix (@$ip_ranges) {
             if( $ip->within( $prefix->{range})) {
-                return Future->done(IP::CloudHoster::Info->new($prefix))
+                return Future->done(IP::CloudHoster::Info->new(%$prefix, ip => $ip ))
             };
         };
 

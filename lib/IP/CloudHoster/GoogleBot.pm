@@ -54,6 +54,7 @@ sub identify( $self, $ip, %options ) {
             region => undef,
             provider => 'googlebot',
             range => NetAddr::IP->new( $ip ),
+            ip    => NetAddr::IP->new( $ip ),
         }))
     });
 }

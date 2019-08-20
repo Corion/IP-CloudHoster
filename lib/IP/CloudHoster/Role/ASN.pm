@@ -47,6 +47,7 @@ sub identify( $self, $ip, %options ) {
                 return Future->done(IP::CloudHoster::Info->new({
                     provider => $self->provider,
                     range => $prefix,
+                    ip => $ip,
                 }))
             };
         };

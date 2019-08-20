@@ -51,4 +51,14 @@ has 'range' => (
     is => 'ro',
 );
 
+=head2 C<< ip >>
+
+L<NetAddr::IP> representing the IP address originally asked for
+
+=cut
+
+has 'ip' => (
+    is => 'ro',
+);
+
 1;

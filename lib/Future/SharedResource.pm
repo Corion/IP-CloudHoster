@@ -4,8 +4,6 @@ use Filter::signatures;
 no warnings 'experimental::signatures';
 use feature 'signatures';
 
-use Future;
-use Future::Mutex;
 use Exporter 'import';
 our @EXPORT_OK = qw(&shared_resource &make_shared_resource);
 

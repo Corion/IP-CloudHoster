@@ -19,6 +19,10 @@ IP::CloudHoster -  Determine VPSes and cloud hosting machines via their IP addre
     my $info = $id->identify( $ip )->get;
     print "$ip belongs to " . $info->provider;
 
+# SEE ALSO
+
+[Robots::Validate](https://metacpan.org/pod/Robots::Validate) - check if a given UA actually is a (search index) bot
+
 # SOURCES
 
 ## Amazon AWS

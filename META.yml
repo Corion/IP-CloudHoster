@@ -3,14 +3,14 @@ abstract: 'Determine VPSes and cloud hosting machines via their IP address'
 author:
   - 'Max Maischein <corion@cpan.org>'
 build_requires:
-  AnyEvent::Future: '0'
   Data::Dumper: '0'
   ExtUtils::MakeMaker: '0'
+  Future::IO: '0'
   Test::More: '0'
 configure_requires:
   ExtUtils::MakeMaker: '0'
 dynamic_config: 0
-generated_by: 'ExtUtils::MakeMaker version 7.24, CPAN::Meta::Converter version 2.150010'
+generated_by: 'ExtUtils::MakeMaker version 7.34, CPAN::Meta::Converter version 2.150010'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -21,6 +21,8 @@ no_index:
     - t
     - inc
 requires:
+  AnyEvent::DNS: '0'
+  AnyEvent::Future: '0'
   Carp: '0'
   Exporter: '5'
   Filter::signatures: '0.09'
@@ -31,7 +33,9 @@ requires:
   Module::Pluggable: '0'
   Moo: '2'
   Net::IRR: '0'
-  Net::Netmask: '0'
+  NetAddr::IP: '0'
+  Path::Class: '0'
+  XML::LibXML: '0'
   perl: '5.006'
 resources:
   repository: git://github.com/Corion/IP-CloudHoster.git

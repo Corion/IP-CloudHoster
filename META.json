@@ -4,7 +4,7 @@
       "Max Maischein <corion@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "ExtUtils::MakeMaker version 7.24, CPAN::Meta::Converter version 2.150010",
+   "generated_by" : "ExtUtils::MakeMaker version 7.34, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "perl_5"
    ],
@@ -32,6 +32,8 @@
       },
       "runtime" : {
          "requires" : {
+            "AnyEvent::DNS" : "0",
+            "AnyEvent::Future" : "0",
             "Carp" : "0",
             "Exporter" : "5",
             "Filter::signatures" : "0.09",
@@ -42,14 +44,16 @@
             "Module::Pluggable" : "0",
             "Moo" : "2",
             "Net::IRR" : "0",
-            "Net::Netmask" : "0",
+            "NetAddr::IP" : "0",
+            "Path::Class" : "0",
+            "XML::LibXML" : "0",
             "perl" : "5.006"
          }
       },
       "test" : {
          "requires" : {
-            "AnyEvent::Future" : "0",
             "Data::Dumper" : "0",
+            "Future::IO" : "0",
             "Test::More" : "0"
          }
       }
@@ -63,6 +67,6 @@
       }
    },
    "version" : "0.01",
-   "x_serialization_backend" : "JSON::PP version 2.94",
+   "x_serialization_backend" : "JSON::PP version 2.97001",
    "x_static_install" : 1
 }

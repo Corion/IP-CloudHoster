@@ -49,6 +49,7 @@ my %module = (
         'Carp'               => 0,
         'Module::Pluggable'  => 0,
         'Future'             => 0,
+        'Path::Class'        => 0,
 
         'Future::HTTP'       => 0.06, # fixes Mojolicious error handling
         'JSON'               => 0, # for AWS

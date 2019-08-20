@@ -1,5 +1,6 @@
 
-[![Build Status](https://travis-ci.org/Corion/WWW-Mechanize-Chrome.svg?branch=master)](https://github.com/Corion/WWW-Mechanize-Chrome)
+[![Travis Build Status](https://travis-ci.org/Corion/IP-CloudHoster.svg?branch=master)](https://travis-ci.org/Corion/IP-CloudHoster)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Corion/IP-CloudHoster?branch=master&svg=true)](https://ci.appveyor.com/project/Corion/IP-CloudHoster)
 
 # NAME
 

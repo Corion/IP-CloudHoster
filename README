@@ -25,3 +25,10 @@ Should you wish to install this module manually, the procedure is
 
 
 
+
+SEE ALSO
+
+L<Robots::Validate> - check if a given UA actually is a (search index) bot
+
+
+

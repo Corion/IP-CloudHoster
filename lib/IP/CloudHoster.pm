@@ -43,22 +43,52 @@ sub identify {
     # we'll return the first future that responds favourably
     use AnyEvent::Future;
     my $res = AnyEvent::Future->new();
-    my $f; $f = Future->needs_any(
+    my $f; $f =
+    Future->needs_any(
         map {
-            #my $n = $_;
+            my $n = $_;
             #warn "$n launched";
-            $_->identify( $ip, %options )->on_ready(sub {
-                #if( $_[0]->is_ready ) {
-                #    warn "$n ready";
-                #} else {
-                #    warn "$n failed";
-                #};
-            });
+            $n->identify( $ip, %options )
+            #->on_ready(sub {
+            #    if( $_[0]->is_ready ) {
+            #        warn "$n ready";
+            #    } else {
+            #        warn "$n failed";
+            #    };
+            #});
         } @{ $self->plugins }
-    )->on_fail(sub {
-        undef $f;
+    )#->on_ready(sub {
+    #    warn "Ready";
+    #})
+    ->on_fail(sub {
+        #if( $f == $f ) { 1 }; # keep a hold on $f
+        #warn "Failed (@_)";
+        #
+        #if( $f) {
+        #    warn "--- cancelled";
+        #    warn $_ for $f->cancelled_futures;
+        #    warn "--- pending";
+        #    warn $_ for $f->pending_futures;
+        #    warn "--- ready";
+        #    warn $_ for $f->ready_futures;
+        #    warn "---";
+        #};
         $res->done()
-    })->on_done($res);
+    })->on_done(sub {
+        #if( $f == $f ) { 1 }; # keep a hold on $f
+        #use Data::Dumper;
+        #warn "Done " . Dumper \@_;
+        #if( $f ) {
+        #warn "--- cancelled";
+        #warn $_ for $f->cancelled_futures;
+        #warn "--- pending";
+        #warn $_ for $f->pending_futures;
+        #warn "--- ready";
+        #warn $_ for $f->ready_futures;
+        #warn "---";
+        #};
+        $res->done( @_ )
+    })->retain;
     return $res
 }
 

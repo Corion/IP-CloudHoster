@@ -38,6 +38,7 @@ requires:
   XML::LibXML: '0'
   perl: '5.006'
 resources:
+  license: https://dev.perl.org/licenses/
   repository: git://github.com/Corion/IP-CloudHoster.git
 version: '0.01'
 x_serialization_backend: 'CPAN::Meta::YAML version 0.018'

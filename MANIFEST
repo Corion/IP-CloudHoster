@@ -10,6 +10,7 @@ lib/IP/CloudHoster/HostEurope.pm
 lib/IP/CloudHoster/Info.pm
 lib/IP/CloudHoster/Linode.pm
 lib/IP/CloudHoster/Role/ASN.pm
+LICENSE
 Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP

@@ -30,6 +30,8 @@ my %module = (
                 url => "git://github.com/Corion/$distlink.git",
                 type => 'git',
             }
+            bugtracker => "https://rt.cpan.org/Public/Dist/Display.html?Name=$distbase",
+            license    => "https://dev.perl.org/licenses/",
         },
         dynamic_config   => 0, # we promise to keep META.* up-to-date
         x_static_install => 1, # we are pure Perl and don't do anything fancy
@@ -192,9 +194,9 @@ sub pod_section {
         shift @section if $remove_heading;
 
         pop @section
-            while $section[-1] =~ /^\s*$/;
+            while @section and $section[-1] =~ /^\s*$/;
         shift @section
-            while $section[0] =~ /^\s*$/;
+            while @section and $section[0] =~ /^\s*$/;
     };
 
     @section = map { $_ =~ s!^=\w+\s+!!; $_ } @section;
